@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Blood Bank</string>
+    <string name="blood_bank">Blood Bank</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome_to_login_page">Welcome to login page</string>
+    <string name="email_editText">Email</string>
+</resources>
