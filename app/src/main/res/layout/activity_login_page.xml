@@ -21,6 +21,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <ImageView
+        android:id="@+id/app_logo_img"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
     <TextView
         android:id="@+id/project_name"
         android:layout_above="@+id/title"
@@ -76,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="5dp"
-            android:inputType="phone"
             android:paddingStart="9dp"
             android:singleLine="true"
             android:layout_below="@+id/emailProfile"/>
