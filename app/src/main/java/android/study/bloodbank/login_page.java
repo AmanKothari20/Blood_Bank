@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +44,7 @@ public class login_page extends AppCompatActivity {
     EditText userNameEdt,userPassEdt;
     Button loginBtn;
     ImageView logoImgView;
+    TextView query_result;
     private static final String user = "root";
     private static final String pass = "";
     ProgressDialog pd;
@@ -60,6 +63,7 @@ public class login_page extends AppCompatActivity {
 
         userNameEdt = findViewById(R.id.email);
         userPassEdt = findViewById(R.id.userP);
+        query_result = findViewById(R.id.pagehead);
 
         loginBtn = findViewById(R.id.LoginUser);
         logoImgView = findViewById(R.id.app_logo_img);
@@ -69,7 +73,8 @@ public class login_page extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new JsonTask().execute("https://6598d22a0ac6.ngrok.io/testing.php");
+                String query = "select * from users where name = 'mangalam'";
+                new JsonTask().execute("https://4ba53609fd45.ngrok.io/testing.php?query="+query);
 
             }
         });
@@ -113,6 +118,7 @@ public class login_page extends AppCompatActivity {
 
                 }
 
+
                 return buffer.toString();
 
 
@@ -138,8 +144,29 @@ public class login_page extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            
-            userNameEdt.setText(result);
+
+            query_result.setText(result);
+            String queryResult="Name   Password\n\n";
+
+           try {
+                //JSONObject obj = new JSONObject(result);
+
+                //String pageName = obj.getJSONObject("pageInfo").getString("pageName");
+
+
+                JSONArray arr = new JSONArray(result); // notice that `"posts": [...]`
+                //arr = obj.getJSONArray("results");
+                for (int i = 0; i < arr.length(); i++)
+                {
+                    JSONObject jo = arr.getJSONObject(i);
+                    queryResult = queryResult +""+ jo.getString("name")+"    "+jo.getString("password")+"\n";
+
+                }
+                query_result.setText(queryResult);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

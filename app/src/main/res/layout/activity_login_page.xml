@@ -7,11 +7,14 @@
     tools:context=".MainActivity"
     android:background="@android:color/holo_blue_dark">
 
+
+
     <TextView
+        android:id="@+id/pagehead"
         android:layout_alignParentTop="true"
         android:text="Blood Bank"
         android:textColor="@android:color/white"
-        android:textSize="40sp"
+        android:textSize="24sp"
         android:layout_marginTop="40dp"
         android:layout_above="@+id/project_name"
         android:gravity="center_vertical"
