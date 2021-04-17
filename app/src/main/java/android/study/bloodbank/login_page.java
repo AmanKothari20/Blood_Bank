@@ -3,6 +3,7 @@ package android.study.bloodbank;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -35,13 +43,14 @@ public class login_page extends AppCompatActivity {
     Button loginBtn;
     ImageView logoImgView;
     private static final String user = "root";
-    private static final String pass = "Mangalam06-";
+    private static final String pass = "";
+    ProgressDialog pd;
     String user_phone="",user_pass="";
 
     //JSONParser jParser = new JSONParser();
 
     //JSONObject json;
-    private static String url_login = "jdbc:mysql://127.0.0.1:3306/Blood_Bank";
+    private static String url_login = "jdbc:mysql://198.168.1.1:3306/blood_bank_management";
     //JSONArray incoming_msg = null;
 
     @Override
@@ -60,8 +69,7 @@ public class login_page extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectMySql connectMySql = new ConnectMySql();
-                connectMySql.execute("");
+                new JsonTask().execute("https://6598d22a0ac6.ngrok.io/testing.php");
 
             }
         });
@@ -72,47 +80,66 @@ public class login_page extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class ConnectMySql extends AsyncTask<String, Void, String> {
-        String res = "";
+    private class JsonTask extends AsyncTask<String, String, String> {
 
-        @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(login_page.this, "Please wait...", Toast.LENGTH_SHORT)
-                    .show();
+
 
         }
 
-        @Override
         protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
             try {
-                //Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url_login, user, pass);
-                System.out.println("Databaseection success");
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
 
-                String result = "Database Connection Successful\n";
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select distinct phoneno from user");
-                ResultSetMetaData rsmd = rs.getMetaData();
 
-                while (rs.next()) {
-                    result += rs.getString(1).toString() + "\n";
-                    user_phone = ""+rs.getString(1);
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
                 }
-                res = result;
-            } catch (Exception e) {
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-                res = e.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            return res;
+            return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(login_page.this, result, Toast.LENGTH_SHORT).show();
-            if(user_phone.equalsIgnoreCase(userNameEdt.getText().toString())){
-                startActivity(new Intent(login_page.this,MainActivity.class));
-            }
+            super.onPostExecute(result);
+            
+            userNameEdt.setText(result);
         }
     }
 
