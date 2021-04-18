@@ -8,18 +8,19 @@
 
 
     <TextView
-        android:layout_alignParentTop="true"
-        android:text="Blood Bank"
-        android:textColor="@android:color/white"
-        android:textSize="40sp"
-        android:layout_marginTop="40dp"
-        android:layout_above="@+id/project_name"
-        android:gravity="center_vertical"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/project_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="45dp"
+        android:gravity="center_vertical"
+        android:text="Blood Bank"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:typeface="serif"
         tools:ignore="RtlCompat" />
 
     <TextView
@@ -62,6 +63,29 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/User_name"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:drawableStart="@drawable/ic_baseline_account_circle_24"
+            android:drawablePadding="10dp"
+            android:paddingStart="5dp"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/user_name_text"
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="5dp"
+            android:paddingStart="9dp"
+            android:singleLine="true"
+            android:layout_below="@+id/User_name"
+            />
+
+        <TextView
             android:id="@+id/emailProfile"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
@@ -70,7 +94,8 @@
             android:drawableStart="@drawable/ic_baseline_phone_24"
             android:drawablePadding="10dp"
             android:paddingStart="5dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:layout_below="@id/user_name_text"/>
 
         <EditText
             android:id="@+id/email"
@@ -130,7 +155,7 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
             android:layout_below="@+id/RegisterUser"
-            android:id="@+id/signUpToIn"
+            android:id="@+id/already_user_text"
             android:text="Existing user ? SignIn here"
             android:textColor="@android:color/holo_blue_dark"
             android:layout_width="wrap_content"

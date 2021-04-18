@@ -45,6 +45,7 @@ public class login_page extends AppCompatActivity {
     Button loginBtn;
     ImageView logoImgView;
     TextView query_result;
+    TextView signNewUser;
     private static final String user = "root";
     private static final String pass = "";
     ProgressDialog pd;
@@ -67,15 +68,24 @@ public class login_page extends AppCompatActivity {
 
         loginBtn = findViewById(R.id.LoginUser);
         logoImgView = findViewById(R.id.app_logo_img);
-
+        signNewUser = findViewById(R.id.signInToUp);
         //Picasso.get().load("http://192.168.1.2:8080/sql_img.png").into(logoImgView);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String query = "select * from users where name = 'mangalam'";
-                new JsonTask().execute("https://4ba53609fd45.ngrok.io/testing.php?query="+query);
+                startActivity(new Intent(login_page.this,MainActivity.class));
+//                String query = "select * from user";
+//                new JsonTask().execute("https://9e1fbc336f5c.ngrok.io/testing.php?query="+query);
 
+            }
+        });
+
+        signNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(login_page.this, signUpPage.class);
+                startActivity(intent);
             }
         });
 
@@ -159,11 +169,11 @@ public class login_page extends AppCompatActivity {
                 for (int i = 0; i < arr.length(); i++)
                 {
                     JSONObject jo = arr.getJSONObject(i);
-                    queryResult = queryResult +""+ jo.getString("name")+"    "+jo.getString("password")+"\n";
+                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"\n";
 
                 }
                 query_result.setText(queryResult);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
