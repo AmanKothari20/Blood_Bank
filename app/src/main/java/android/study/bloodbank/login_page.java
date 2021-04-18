@@ -54,7 +54,7 @@ public class login_page extends AppCompatActivity {
     //JSONParser jParser = new JSONParser();
 
     //JSONObject json;
-    private static String url_login = "jdbc:mysql://198.168.1.1:3306/blood_bank_management";
+
     //JSONArray incoming_msg = null;
 
     @Override
