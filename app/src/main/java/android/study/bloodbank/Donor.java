@@ -26,6 +26,7 @@ public class Donor extends AppCompatActivity {
     TextView ResultTable,OutputText;
     String Stock = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +36,15 @@ public class Donor extends AppCompatActivity {
 
         ResultTable = findViewById(R.id.resultText);
         OutputText = findViewById(R.id.outputText);
-        String query = "select * from bloodstock";
-        new JsonTask().execute("https://f756f396f58f.ngrok.io/bloodstock.php?query="+query);
 
+
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("donor");
+        Log.e("bloodgrp",str);
+
+        String query = "select * from bloodstock where BloodGroup = '"+str+"'";
+        new JsonTask().execute("https://f756f396f58f.ngrok.io/bloodstock.php?query="+query);
+        Log.e("blood",query);
 
     }
 

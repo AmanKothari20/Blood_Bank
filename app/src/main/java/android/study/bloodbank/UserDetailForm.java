@@ -31,6 +31,7 @@ public class UserDetailForm extends AppCompatActivity {
 
     Button SubmitDetails;
     EditText Name,Age,City,BloodGrp,PhoneNo,Gender;
+    TextView AlreadyRegistered;
 
 
     @Override
@@ -42,6 +43,7 @@ public class UserDetailForm extends AppCompatActivity {
         Intent intent = getIntent();
         String str = intent.getStringExtra("donor");
         int var = Integer.parseInt(str);
+
 
         SubmitDetails = findViewById(R.id.SubmitUserDetails);
         SubmitDetails.setOnClickListener(new View.OnClickListener() {
@@ -63,14 +65,21 @@ public class UserDetailForm extends AppCompatActivity {
 
                     Log.e("query",query);
                     new JsonTask().execute("https://f756f396f58f.ngrok.io/Donor.php?query="+query);
-                    startActivity(new Intent(getApplicationContext(), Donor.class));
+                    Intent intent = new Intent(getApplicationContext(), Donor.class);
+                    String str = BloodGrp.getText().toString();
+                    intent.putExtra("donor",str);
+                    startActivity(intent);
                 }
                 else if (var == 2) {
                     String query = "insert into seeker values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
 
                     Log.e("query",query);
                     new JsonTask().execute("https://f756f396f58f.ngrok.io/seeker.php?query="+query);
-                    startActivity(new Intent(getApplicationContext(), Reciever.class));
+
+                    Intent intent = new Intent(getApplicationContext(), Reciever.class);
+                    String str = BloodGrp.getText().toString();
+                    intent.putExtra("seeker",str);
+                    startActivity(intent);
                 }
                 else
                     Toast.makeText(UserDetailForm.this, "No value", Toast.LENGTH_SHORT).show();
