@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     RelativeLayout BloodDonor;
     RelativeLayout Recipient;
+    RelativeLayout bloodStock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 String str = "2";
                 intent.putExtra("donor",str);
                 startActivity(intent);
+            }
+        });
+
+        bloodStock = findViewById(R.id.Blood_Bank_card);
+        bloodStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),BloodStockInfo.class));
             }
         });
 
