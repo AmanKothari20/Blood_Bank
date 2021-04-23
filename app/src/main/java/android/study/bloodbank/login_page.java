@@ -84,7 +84,7 @@ public class login_page extends AppCompatActivity {
                 String Password = userPassEdt.getText().toString();
                 String query = "select * from user where phoneNo = '"+UserPhone+"' and Password = '"+Password+"';";
                 Log.e("query",query);
-                new JsonTask().execute("https://7df87902d9b9.ngrok.io/testing.php?query="+query);
+                new JsonTask().execute("https://69097247416c.ngrok.io/testing.php?query="+query);
 
                 Log.e("temp1",Integer.toString(temp));
             }
@@ -181,11 +181,12 @@ public class login_page extends AppCompatActivity {
                 for (int i = 0; i < arr.length(); i++)
                 {
                     JSONObject jo = arr.getJSONObject(i);
-                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"    "+jo.getString("Password")+"\n";
+//                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"    "+jo.getString("Password")+"\n";
                     temp++;
                 }
-                query_result.setText(queryResult);
-               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
+
+//               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
+//               query_result.setText(queryResult);
                Log.e("tempValues",Integer.toString(temp));
                if(temp == 1){
                    startActivity(new Intent(login_page.this,MainActivity.class));

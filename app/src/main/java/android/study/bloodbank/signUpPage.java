@@ -47,7 +47,7 @@ public class signUpPage extends AppCompatActivity {
                 String query = "insert into user values('"+userIdGen(PhoneNo.getText().toString())+
                         "','"+Username.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Password.getText().toString()+"');";
                 Log.e("Register",query);
-                new JsonTask().execute("https://7df87902d9b9.ngrok.io/testing.php?query="+query);
+                new JsonTask().execute("https://69097247416c.ngrok.io/testing.php?query="+query);
 
 
                 startActivity(new Intent(signUpPage.this,login_page.class));
@@ -74,11 +74,7 @@ public class signUpPage extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private class JsonTask extends AsyncTask<String, String, String> {
 
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-
-        }
+        protected void onPreExecute() { super.onPreExecute(); }
 
         protected String doInBackground(String... params) {
 
@@ -129,32 +125,6 @@ public class signUpPage extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Toast.makeText(signUpPage.this, result, Toast.LENGTH_SHORT).show();
-
-//            query_result.setText(result);
-            String queryResult="Name   Password\n\n";
-
-            try {
-                //JSONObject obj = new JSONObject(result);
-
-                //String pageName = obj.getJSONObject("pageInfo").getString("pageName");
-
-
-                JSONArray arr = new JSONArray(result); // notice that `"posts": [...]`
-                //arr = obj.getJSONArray("results");
-//                for (int i = 0; i < arr.length(); i++)
-//                {
-//                    JSONObject jo = arr.getJSONObject(i);
-//                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"\n";
-//
-//                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
+        protected void onPostExecute(String result) { super.onPostExecute(result); }
     }
 }
