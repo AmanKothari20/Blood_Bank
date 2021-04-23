@@ -59,15 +59,17 @@ public class UserDetailForm extends AppCompatActivity {
                 Log.e("date",date);
 
                 if (var == 1){
-                    String query = "insert into donor values('D7790977030','aman',21,'Kishangarh','O+','7790977030','male','2021-04-23');";
+                    String query = "insert into donor values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
 
                     Log.e("query",query);
-                    new JsonTask().execute("https://69097247416c.ngrok.io/Donor.php?query="+query);
-//                    startActivity(new Intent(getApplicationContext(), Donor.class));
+                    new JsonTask().execute("https://f756f396f58f.ngrok.io/Donor.php?query="+query);
+                    startActivity(new Intent(getApplicationContext(), Donor.class));
                 }
                 else if (var == 2) {
-                    String query = "";
-                    new JsonTask().execute("https://69097247416c.ngrok.io/Donor.php?query="+query);
+                    String query = "insert into seeker values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
+
+                    Log.e("query",query);
+                    new JsonTask().execute("https://f756f396f58f.ngrok.io/seeker.php?query="+query);
                     startActivity(new Intent(getApplicationContext(), Reciever.class));
                 }
                 else

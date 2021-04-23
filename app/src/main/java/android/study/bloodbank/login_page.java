@@ -84,7 +84,7 @@ public class login_page extends AppCompatActivity {
                 String Password = userPassEdt.getText().toString();
                 String query = "select * from user where phoneNo = '"+UserPhone+"' and Password = '"+Password+"';";
                 Log.e("query",query);
-                new JsonTask().execute("https://69097247416c.ngrok.io/testing.php?query="+query);
+                new JsonTask().execute("https://f756f396f58f.ngrok.io/testing.php?query="+query);
 
                 Log.e("temp1",Integer.toString(temp));
             }
