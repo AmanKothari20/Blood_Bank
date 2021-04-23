@@ -39,7 +39,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.Result;
+
 public class login_page extends AppCompatActivity {
+
+    public int temp = 0;
 
     EditText userNameEdt,userPassEdt;
     Button loginBtn;
@@ -62,22 +66,27 @@ public class login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        userNameEdt = findViewById(R.id.email);
-        userPassEdt = findViewById(R.id.userP);
+        userNameEdt = findViewById(R.id.PhoneEditLogin);
+        userPassEdt = findViewById(R.id.userPassEdit);
+
         query_result = findViewById(R.id.pagehead);
 
         loginBtn = findViewById(R.id.LoginUser);
         logoImgView = findViewById(R.id.app_logo_img);
         signNewUser = findViewById(R.id.signInToUp);
-        //Picasso.get().load("http://192.168.1.2:8080/sql_img.png").into(logoImgView);
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login_page.this,MainActivity.class));
-//                String query = "select * from user";
-//                new JsonTask().execute("https://9e1fbc336f5c.ngrok.io/testing.php?query="+query);
+                String UserPhone = userNameEdt.getText().toString();
+                String Password = userPassEdt.getText().toString();
+                String query = "select * from user where phoneNo = '"+UserPhone+"' and Password = '"+Password+"';";
+                Log.e("query",query);
+                new JsonTask().execute("https://7df87902d9b9.ngrok.io/testing.php?query="+query);
 
+                Log.e("temp1",Integer.toString(temp));
             }
         });
 
@@ -155,8 +164,11 @@ public class login_page extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            query_result.setText(result);
+//            Toast.makeText(login_page.this, result, Toast.LENGTH_SHORT).show();
+
+//            query_result.setText(result);
             String queryResult="Name   Password\n\n";
+
 
            try {
                 //JSONObject obj = new JSONObject(result);
@@ -165,18 +177,26 @@ public class login_page extends AppCompatActivity {
 
 
                 JSONArray arr = new JSONArray(result); // notice that `"posts": [...]`
-                //arr = obj.getJSONArray("results");
+//                arr = obj.getJSONArray("results");
                 for (int i = 0; i < arr.length(); i++)
                 {
                     JSONObject jo = arr.getJSONObject(i);
-                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"\n";
-
+                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"    "+jo.getString("Password")+"\n";
+                    temp++;
                 }
                 query_result.setText(queryResult);
+               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
+               Log.e("tempValues",Integer.toString(temp));
+               if(temp == 1){
+                   startActivity(new Intent(login_page.this,MainActivity.class));
+                   temp=0;
+               }
+               else
+                   Toast.makeText(login_page.this, "Wrong Phone number or password", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+//
         }
     }
 

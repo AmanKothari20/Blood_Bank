@@ -83,16 +83,15 @@
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/email"
-            android:layout_marginTop="1dp"
+            android:id="@+id/PhoneEditLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_below="@+id/emailProfile"
+            android:layout_marginTop="1dp"
             android:layout_marginEnd="5dp"
-            android:textColor="@android:color/black"
             android:paddingStart="9dp"
             android:singleLine="true"
-            android:layout_below="@+id/emailProfile"/>
+            android:textColor="@android:color/black" />
 
 
 
@@ -107,10 +106,10 @@
             android:drawablePadding="10dp"
             android:paddingStart="5dp"
             android:singleLine="true"
-            android:layout_below="@id/email"/>
+            android:layout_below="@id/PhoneEditLogin"/>
 
         <EditText
-            android:id="@+id/userP"
+            android:id="@+id/userPassEdit"
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,7 +132,7 @@
             android:layout_marginStart="40dp"
             android:id="@+id/LoginUser"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/userP"
+            android:layout_below="@+id/userPassEdit"
             android:layout_marginTop="15dp"
             android:background="@drawable/round_button"
             android:layout_width="match_parent"

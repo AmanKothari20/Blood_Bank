@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ public class signUpPage extends AppCompatActivity {
     Button Register_btn;
     TextView BackToLogin;
 
+    EditText Username,PhoneNo,Password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +41,13 @@ public class signUpPage extends AppCompatActivity {
         Register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String query = "insert into user values('U3','anirudh','1234567891','anirudh');";
-                new JsonTask().execute("https://9db616c901ac.ngrok.io/testing.php?query="+query);
+                Username=findViewById(R.id.user_name_text);
+                PhoneNo=findViewById(R.id.Phone_text);
+                Password=findViewById(R.id.userP_Text);
+                String query = "insert into user values('"+userIdGen(PhoneNo.getText().toString())+
+                        "','"+Username.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Password.getText().toString()+"');";
+                Log.e("Register",query);
+                new JsonTask().execute("https://7df87902d9b9.ngrok.io/testing.php?query="+query);
 
 
                 startActivity(new Intent(signUpPage.this,login_page.class));
@@ -55,6 +63,13 @@ public class signUpPage extends AppCompatActivity {
             }
         });
     }
+
+    String userIdGen(String PhoneNo){
+        String User_id;
+        User_id = 'U'+PhoneNo;
+        return User_id;
+    }
+
 
     @SuppressLint("StaticFieldLeak")
     private class JsonTask extends AsyncTask<String, String, String> {
@@ -135,7 +150,7 @@ public class signUpPage extends AppCompatActivity {
 //                    queryResult = queryResult +""+jo.getString("user_id")+"    "+jo.getString("name")+"    "+jo.getString("phoneNo")+"\n";
 //
 //                }
-//                query_result.setText(queryResult);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

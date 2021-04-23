@@ -86,19 +86,19 @@
             />
 
         <TextView
-            android:id="@+id/emailProfile"
-            android:layout_marginTop="30dp"
+            android:id="@+id/PhoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phone No."
+            android:layout_below="@id/user_name_text"
+            android:layout_marginTop="10dp"
             android:drawableStart="@drawable/ic_baseline_phone_24"
             android:drawablePadding="10dp"
             android:paddingStart="5dp"
             android:singleLine="true"
-            android:layout_below="@id/user_name_text"/>
+            android:text="Phone No." />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/Phone_text"
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
             android:layout_marginEnd="5dp"
             android:paddingStart="9dp"
             android:singleLine="true"
-            android:layout_below="@+id/emailProfile"/>
+            android:layout_below="@+id/PhoneNo"/>
 
 
 
@@ -120,10 +120,10 @@
             android:drawablePadding="10dp"
             android:paddingStart="5dp"
             android:singleLine="true"
-            android:layout_below="@id/email"/>
+            android:layout_below="@id/Phone_text"/>
 
         <EditText
-            android:id="@+id/userP"
+            android:id="@+id/userP_Text"
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
             android:layout_marginStart="40dp"
             android:id="@+id/RegisterUser"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/userP"
+            android:layout_below="@+id/userP_Text"
             android:layout_marginTop="15dp"
             android:background="@drawable/round_button"
             android:layout_width="match_parent"
