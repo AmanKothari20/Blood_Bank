@@ -22,6 +22,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Reciever extends AppCompatActivity {
 
     TextView DonorList,FinalResult;
@@ -114,8 +115,6 @@ public class Reciever extends AppCompatActivity {
 
 //            query_result.setText(result);
 
-
-
             try {
                 //JSONObject obj = new JSONObject(result);
 
@@ -140,7 +139,7 @@ public class Reciever extends AppCompatActivity {
                     for (int i = 0; i < arr.length(); i++)
                     {
                         JSONObject jo = arr.getJSONObject(i);
-                        queryResult = queryResult +""+jo.getString("name")+" "+jo.getString("age")+" "+jo.getString("city")+" "+jo.getString("bloodGroup")+" "+jo.getString("phoneNo")+" "+jo.getString("gender")+"\n";
+                        queryResult = queryResult +""+jo.getString("name")+" "+jo.getString("city")+" "+jo.getString("phoneNo")+"\n";
                         temp2++;
                     }
                 }
@@ -172,14 +171,10 @@ public class Reciever extends AppCompatActivity {
                         temp++;
                     }
                     if(temp2 == 0){
-                        String text = "We dont have any donor or blood stock of blood type :"+str;
+                        String text = "We don't have any blood stock of blood type : "+str;
                         FinalResult.setText(text);
                     }
                 }
-
-
-
-
 //                Log.e("temp2",Integer.toString(temp2));
 //                if(temp == 0 || Integer.valueOf(quantity) <= 0 ){
 //                        String text = "Sorry we don't have this type of blood presently";
