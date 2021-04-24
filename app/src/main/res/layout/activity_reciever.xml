@@ -4,11 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reciever">
+    tools:context=".Reciever"
+    android:background="@android:color/holo_blue_dark">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/SeekerText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="reciever"/>
+        android:layout_margin="20dp"
+        android:text="We will get back to you"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/round_white_no_border_20r"
+        android:layout_below="@id/SeekerText">
+
+        <TextView
+            android:id="@+id/DonorList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text=""
+            />
+
+        <TextView
+            android:id="@+id/FinalText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DonorList"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text=""
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

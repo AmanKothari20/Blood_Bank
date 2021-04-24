@@ -20,11 +20,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Donor extends AppCompatActivity {
 
     TextView ResultTable,OutputText;
     String Stock = "";
+    String StockId = "";
+    String str = "";
+    int temp = 0;
 
 
     @Override
@@ -39,12 +44,14 @@ public class Donor extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String str = intent.getStringExtra("donor");
+        str = intent.getStringExtra("donor");
         Log.e("bloodgrp",str);
 
         String query = "select * from bloodstock where BloodGroup = '"+str+"'";
         new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
         Log.e("blood",query);
+//        Toast.makeText(this, Stock, Toast.LENGTH_SHORT).show();
+        Log.e("stock",Stock);
 
     }
 
@@ -128,14 +135,32 @@ public class Donor extends AppCompatActivity {
                     JSONObject jo = arr.getJSONObject(i);
                      queryResult = queryResult +""+jo.getString("BloodGroup")+"        "+jo.getString("Quantity")+"        "+jo.getString("BestBefore")+"\n";
                     Stock = jo.getString("Quantity");
+                    StockId = jo.getString("BloodGroup");
+                    temp++;
                 }
 
 //               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
                ResultTable.setText(queryResult);
+                Log.e("temp",Integer.toString(temp));
+                if(temp == 0){
+                    String text = " You can come tomorrow and donate blood";
+                    OutputText.setText(text);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String date = sdf.format(new Date());
+                    String query = "insert into bloodstock values('Stock"+date+"','"+str+"','1','"+date+"','15');\n";
+                    Log.e("insert",query);
+                    new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
+                }
+
                 if(Integer.valueOf(Stock) < 10){
                     String text = " You can come tomorrow and donate blood";
                     OutputText.setText(text);
+                    String UpdateStockValue = Integer.toString(Integer.valueOf(Stock)+1);
+                    String query = "UPDATE bloodstock SET Quantity = '"+UpdateStockValue+"' WHERE (BloodGroup = '"+StockId+"');\n";
+                    new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
+
                 }
+
                 else{
                     String text = "Your type of blood is enough in the blood bank. we will contact you in case of emergency";
                     OutputText.setText(text);

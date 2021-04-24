@@ -71,7 +71,7 @@ public class UserDetailForm extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if (var == 2) {
-                    String query = "insert into seeker values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
+                    String query = "insert into seeker values('"+SeekerIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
 
                     Log.e("query",query);
                     new JsonTask().execute(login_page.url+"/seeker.php?query="+query);
@@ -89,6 +89,9 @@ public class UserDetailForm extends AppCompatActivity {
 
     String DonorIdGen(String Phone){
         return "D"+Phone;
+    }
+    String SeekerIdGen(String Phone){
+        return "S"+Phone;
     }
 
     @SuppressLint("StaticFieldLeak")
