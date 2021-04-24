@@ -153,7 +153,7 @@ public class Reciever extends AppCompatActivity {
 
 
 
-                if(Integer.valueOf(quantity) >0 && temp == 1){
+                if(Integer.valueOf(quantity) >0 ){
                     String text = " You can come and collect blood from bloodbank";
                     FinalResult.setText(text);
                     String UpdateStockValue = Integer.toString(Integer.valueOf(quantity)-1);
@@ -161,8 +161,8 @@ public class Reciever extends AppCompatActivity {
                     new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
 
                 }
-
-                    if(temp == 0 ){
+                if(Case == 1){
+                    if(Integer.valueOf(quantity) == 0 ){
                         String text = "List of potential donors for blood type "+str;
                         FinalResult.setText(text);
 
@@ -171,6 +171,11 @@ public class Reciever extends AppCompatActivity {
                         new JsonTask().execute(login_page.url+"/donor.php?query="+query);
                         temp++;
                     }
+                    if(temp2 == 0){
+                        String text = "We dont have any donor or blood stock of blood type :"+str;
+                        FinalResult.setText(text);
+                    }
+                }
 
 
 
