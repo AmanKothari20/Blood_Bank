@@ -42,7 +42,7 @@ import java.util.List;
 import javax.xml.transform.Result;
 
 public class login_page extends AppCompatActivity {
-
+    public static String url = "https://20cda629f86c.ngrok.io";
     public int temp = 0;
 
     EditText userNameEdt,userPassEdt;
@@ -84,7 +84,7 @@ public class login_page extends AppCompatActivity {
                 String Password = userPassEdt.getText().toString();
                 String query = "select * from user where phoneNo = '"+UserPhone+"' and Password = '"+Password+"';";
                 Log.e("query",query);
-                new JsonTask().execute("https://f756f396f58f.ngrok.io/testing.php?query="+query);
+                new JsonTask().execute(url+"/testing.php?query="+query);
 
                 Log.e("temp1",Integer.toString(temp));
             }

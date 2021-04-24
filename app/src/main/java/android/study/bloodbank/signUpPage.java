@@ -47,7 +47,7 @@ public class signUpPage extends AppCompatActivity {
                 String query = "insert into user values('"+userIdGen(PhoneNo.getText().toString())+
                         "','"+Username.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Password.getText().toString()+"');";
                 Log.e("Register",query);
-                new JsonTask().execute("https://f756f396f58f.ngrok.io/testing.php?query="+query);
+                new JsonTask().execute(login_page.url+"/testing.php?query="+query);
 
 
                 startActivity(new Intent(signUpPage.this,login_page.class));

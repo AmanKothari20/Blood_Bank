@@ -64,7 +64,7 @@ public class UserDetailForm extends AppCompatActivity {
                     String query = "insert into donor values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
 
                     Log.e("query",query);
-                    new JsonTask().execute("https://f756f396f58f.ngrok.io/Donor.php?query="+query);
+                    new JsonTask().execute(login_page.url+"/Donor.php?query="+query);
                     Intent intent = new Intent(getApplicationContext(), Donor.class);
                     String str = BloodGrp.getText().toString();
                     intent.putExtra("donor",str);
@@ -74,7 +74,7 @@ public class UserDetailForm extends AppCompatActivity {
                     String query = "insert into seeker values('"+DonorIdGen(PhoneNo.getText().toString())+"','"+Name.getText().toString()+"','"+Age.getText().toString()+"','"+City.getText().toString()+"','"+BloodGrp.getText().toString()+"','"+PhoneNo.getText().toString()+"','"+Gender.getText().toString()+"','"+date+"');";
 
                     Log.e("query",query);
-                    new JsonTask().execute("https://f756f396f58f.ngrok.io/seeker.php?query="+query);
+                    new JsonTask().execute(login_page.url+"/seeker.php?query="+query);
 
                     Intent intent = new Intent(getApplicationContext(), Reciever.class);
                     String str = BloodGrp.getText().toString();

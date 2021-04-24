@@ -31,7 +31,7 @@ public class BloodStockInfo extends AppCompatActivity {
         stockTV = (TextView) findViewById(R.id.bloodstock_tv);
 
         String query = "select * from bloodstock";
-        new JsonTask().execute("https://f756f396f58f.ngrok.io/bloodstock.php?query="+query);
+        new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
 
 
     }

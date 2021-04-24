@@ -43,7 +43,7 @@ public class Donor extends AppCompatActivity {
         Log.e("bloodgrp",str);
 
         String query = "select * from bloodstock where BloodGroup = '"+str+"'";
-        new JsonTask().execute("https://f756f396f58f.ngrok.io/bloodstock.php?query="+query);
+        new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
         Log.e("blood",query);
 
     }
