@@ -149,21 +149,11 @@ public class Reciever extends AppCompatActivity {
 //               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
                 DonorList.setText(queryResult);
                 Log.e("temp",Integer.toString(temp));
-                if(temp2 == 0){
-                    String text = "Sorry we don't have this type of blood presently";
-                    FinalResult.setText(text);
-                }
-                if(temp == 0){
-                    String text = "List of potential donors for blood type "+str;
-                    FinalResult.setText(text);
 
-                    String query = "select * from donor where bloodGroup = '"+str+"';\n";
-                    Log.e("donor list",query);
-                    new JsonTask().execute(login_page.url+"/donor.php?query="+query);
-                    temp++;
-                }
 
-                if(Integer.valueOf(quantity) >0){
+
+
+                if(Integer.valueOf(quantity) >0 && temp == 1){
                     String text = " You can come and collect blood from bloodbank";
                     FinalResult.setText(text);
                     String UpdateStockValue = Integer.toString(Integer.valueOf(quantity)-1);
@@ -171,9 +161,25 @@ public class Reciever extends AppCompatActivity {
                     new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
 
                 }
-                Log.e("temp2",Integer.toString(temp2));
+
+                    if(temp == 0 ){
+                        String text = "List of potential donors for blood type "+str;
+                        FinalResult.setText(text);
+
+                        String query = "select * from donor where bloodGroup = '"+str+"';\n";
+                        Log.e("donor list",query);
+                        new JsonTask().execute(login_page.url+"/donor.php?query="+query);
+                        temp++;
+                    }
 
 
+
+
+//                Log.e("temp2",Integer.toString(temp2));
+//                if(temp == 0 || Integer.valueOf(quantity) <= 0 ){
+//                        String text = "Sorry we don't have this type of blood presently";
+//                        FinalResult.setText(text);
+//                }
 
 
             } catch (Exception e) {
