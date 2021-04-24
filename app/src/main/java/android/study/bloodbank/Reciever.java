@@ -28,7 +28,8 @@ public class Reciever extends AppCompatActivity {
     String str = "";
     String quantity = "";
     String BloodGrp = "";
-    int temp =0;
+    int temp =0,temp2=0;
+    int Case = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,41 +108,59 @@ public class Reciever extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            Case++;
+            Log.e("Case",Integer.toString(Case));
 //            Toast.makeText(login_page.this, result, Toast.LENGTH_SHORT).show();
 
 //            query_result.setText(result);
-            String queryResult="Blood Group\tStock\tBest Before\n\n";
+
 
 
             try {
                 //JSONObject obj = new JSONObject(result);
 
                 //String pageName = obj.getJSONObject("pageInfo").getString("pageName");
-
+                String queryResult = "";
 
                 JSONArray arr = new JSONArray(result); // notice that `"posts": [...]`
 //                arr = obj.getJSONArray("results");
-                for (int i = 0; i < arr.length(); i++)
-                {
-                    JSONObject jo = arr.getJSONObject(i);
-                    queryResult = queryResult +""+jo.getString("BloodGroup")+"        "+jo.getString("Quantity")+"        "+jo.getString("BestBefore")+"\n";
-                    quantity = jo.getString("Quantity");
-                    BloodGrp = jo.getString("BloodGroup");
-                    temp++;
+                if(Case == 1){
+                    queryResult="Blood Group\tStock\tBest Before\n\n";
+                    for (int i = 0; i < arr.length(); i++)
+                    {
+                        JSONObject jo = arr.getJSONObject(i);
+                        queryResult = queryResult +""+jo.getString("BloodGroup")+"        "+jo.getString("Quantity")+"        "+jo.getString("BestBefore")+"\n";
+                        quantity = jo.getString("Quantity");
+                        BloodGrp = jo.getString("BloodGroup");
+                        temp++;
+                    }
                 }
+                else if(Case == 2){
+                    queryResult="Name Age City BloodGroup PhoneNo gender\n\n";
+                    for (int i = 0; i < arr.length(); i++)
+                    {
+                        JSONObject jo = arr.getJSONObject(i);
+                        queryResult = queryResult +""+jo.getString("name")+" "+jo.getString("age")+" "+jo.getString("city")+" "+jo.getString("bloodGroup")+" "+jo.getString("phoneNo")+" "+jo.getString("gender")+"\n";
+                        temp2++;
+                    }
+                }
+
 
 //               Toast.makeText(login_page.this, Integer.toString(temp), Toast.LENGTH_SHORT).show();
                 DonorList.setText(queryResult);
                 Log.e("temp",Integer.toString(temp));
-                if(temp == 0){
-                    String text = "List of potential donors for blood type "+BloodGrp;
+                if(temp2 == 0){
+                    String text = "Sorry we don't have this type of blood presently";
                     FinalResult.setText(text);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String date = sdf.format(new Date());
-                    String query = "select * from donor where bloodGroup = '"+BloodGrp+"';\n";
+                }
+                if(temp == 0){
+                    String text = "List of potential donors for blood type "+str;
+                    FinalResult.setText(text);
+
+                    String query = "select * from donor where bloodGroup = '"+str+"';\n";
                     Log.e("donor list",query);
-                    new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
+                    new JsonTask().execute(login_page.url+"/donor.php?query="+query);
+                    temp++;
                 }
 
                 if(Integer.valueOf(quantity) >0){
@@ -152,11 +171,9 @@ public class Reciever extends AppCompatActivity {
                     new JsonTask().execute(login_page.url+"/bloodstock.php?query="+query);
 
                 }
+                Log.e("temp2",Integer.toString(temp2));
 
-                else{
-                    String text = "Your type of blood is enough in the blood bank. we will contact you in case of emergency";
-                    FinalResult.setText(text);
-                }
+
 
 
             } catch (Exception e) {
