@@ -42,7 +42,7 @@ import java.util.List;
 import javax.xml.transform.Result;
 
 public class login_page extends AppCompatActivity {
-    public static String url = "https://20cda629f86c.ngrok.io";
+    public static String url = "https://b733694e87ac.ngrok.io";
     public int temp = 0;
 
     EditText userNameEdt,userPassEdt;
